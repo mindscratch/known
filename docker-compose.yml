@@ -1,7 +1,7 @@
 version: '2'
 networks:
-  lb_web:
-    external: true
+#  lb_web:
+#    external: true
   back:
     driver: bridge
 services:
@@ -14,7 +14,8 @@ services:
     networks:
     - back
   app:
-    image: indiehosters/known
+    build: .
+    image: known:morningdiscussion
     links:
       - db
     volumes:
@@ -35,4 +36,5 @@ services:
       - VIRTUAL_HOST
     networks:
     - back
-    - lb_web
+    ports:
+      - 80:80
